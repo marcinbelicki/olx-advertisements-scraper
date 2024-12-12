@@ -6,16 +6,16 @@ import discord4j.common.util.Snowflake
 import discord4j.core.DiscordClient
 import discord4j.discordjson.json.MessageData
 import org.olx.scraper.discord.Bot.message
-import org.olx.scraper.olx.models.TradeOffer
+import org.olx.scraper.models.TradeOffer
 import reactor.core.publisher.{Flux, Mono}
 
 import java.net.URL
 import scala.collection.mutable
 
 class Bot(
-    client: DiscordClient,
-    channelId: Snowflake
-) extends LazyLogging {
+           client: DiscordClient,
+           channelId: Snowflake
+         ) extends LazyLogging {
   private val channel = client.getChannelById(channelId)
 
   private def startBot(url: URL): Bot = {
@@ -76,13 +76,9 @@ class Bot(
 
 object Bot {
 
-  val defaultClient: DiscordClient = DiscordClient.create(
-    ConfigFactory.load().getString("olx.scraper.client.token")
-  )
-
   private val message = "Znaleziono nowe ogłoszenia:"
 
-  def apply(channelId: Snowflake, url: URL): Bot =
-    new Bot(defaultClient, channelId).startBot(url)
+  def apply(discordClient: DiscordClient, channelId: Snowflake, url: URL): Bot =
+    new Bot(discordClient, channelId).startBot(url)
 
 }

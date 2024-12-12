@@ -13,8 +13,8 @@ lazy val root = (project in file("."))
 
 
 libraryDependencies ++= Seq(
-  "com.discord4j" % "discord4j-core" % "3.2.6",
-  "net.ruippeixotog" %% "scala-scraper" % "3.0.0",
+  "com.discord4j" % "discord4j-core" % "3.2.7",
+  "net.ruippeixotog" %% "scala-scraper" % "3.1.2",
   "org.scalatest" %% "scalatest" % "3.3.0-SNAP4" % Test,
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
   "ch.qos.logback" % "logback-classic" % "1.3.5",

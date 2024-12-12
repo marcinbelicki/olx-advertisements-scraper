@@ -1,4 +1,4 @@
-package org.olx.scraper.olx.scraper
+package org.olx.scraper
 
 import com.typesafe.scalalogging.LazyLogging
 

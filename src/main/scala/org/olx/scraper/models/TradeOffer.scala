@@ -1,4 +1,4 @@
-package org.olx.scraper.olx.models
+package org.olx.scraper.models
 
 import net.ruippeixotog.scalascraper.browser.Browser
 

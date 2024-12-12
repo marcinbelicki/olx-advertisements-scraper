@@ -1,17 +1,17 @@
-package org.olx.scraper.olx.scraper
+package org.olx.scraper
 
 import com.typesafe.scalalogging.LazyLogging
-import org.olx.scraper.olx.models.TradeOffer
-import org.olx.scraper.reactor.MonoExtension.RichMono
-import reactor.core.publisher.Mono
+import org.olx.scraper.models.TradeOffer
+import org.olx.scraper.reactorextension.MonoExtension.RichMono
 
 import java.io.IOException
 import java.net.{SocketTimeoutException, UnknownHostException}
 import scala.collection.mutable
+import reactor.core.publisher.Mono
 
 class LocalMemoryScraper(
-    scraper: Scraper
-) extends LazyLogging {
+                          scraper: Scraper
+                        ) extends LazyLogging {
 
   private val memorizedOffers = mutable.Set.empty[TradeOffer]
 
@@ -28,8 +28,8 @@ class LocalMemoryScraper(
       .fromCallable[Set[TradeOffer]](() => refreshAndReturnNewOnes)
       .onErrorResumePf {
         case exception: SocketTimeoutException => fallback(exception)
-        case exception: UnknownHostException   => fallback(exception)
-        case exception: IOException            => fallback(exception)
+        case exception: UnknownHostException => fallback(exception)
+        case exception: IOException => fallback(exception)
       }
 
   def refreshAndReturnNewOnes: Set[TradeOffer] = {

@@ -1,4 +1,4 @@
-package org.olx.scraper.reactor
+package org.olx.scraper.reactorextension
 
 import reactor.core.publisher.Mono
 

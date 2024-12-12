@@ -1,7 +1,7 @@
-package org.olx.scraper.olx.scraper
+package org.olx.scraper
 
 import net.ruippeixotog.scalascraper.browser.{Browser, JsoupBrowser}
-import org.olx.scraper.olx.models.TradeOffer
+import org.olx.scraper.models.TradeOffer
 
 import java.net.URL
 
