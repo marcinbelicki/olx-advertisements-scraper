@@ -3,18 +3,19 @@ package org.olx.scraper.refresher
 import discord4j.common.util.Snowflake
 import discord4j.core.DiscordClient
 import discord4j.discordjson.json.MessageData
-import org.olx.scraper.{LocalMemoryScraper, RunAfterStart, Scraper}
+import org.olx.scraper.{RunAfterStart, Scraper, StoreScraper}
 import org.olx.scraper.discord.Bot
+import org.olx.scraper.store.MemoryOffersStore
 import reactor.core.publisher.Flux
 
 import java.net.URL
 
 class SingleChannelRefresher(
                               bot: Bot,
-                              localMemoryScraper: LocalMemoryScraper
+                              storeScraper: StoreScraper
                             ) extends Refresher {
   override def refresh: Flux[MessageData] =
-    localMemoryScraper.refreshAndReturnNewOnesMono
+    storeScraper.refreshAndReturnNewOnesMono
       .flatMapMany(bot.sendOffersMessage)
 
 }
@@ -27,10 +28,11 @@ object SingleChannelRefresher {
         channelId = channelId,
         url = url
       ),
-      localMemoryScraper = new LocalMemoryScraper(
+      storeScraper = new StoreScraper(
         scraper = Scraper(
           url = url
-        )
+        ),
+        offersStore = new MemoryOffersStore
       ) with RunAfterStart
     )
 }

@@ -3,7 +3,7 @@ package org.olx.scraper
 import com.typesafe.scalalogging.LazyLogging
 
 trait RunAfterStart extends LazyLogging {
-  this: LocalMemoryScraper =>
+  this: StoreScraper =>
 
   locally {
     logger.info(s"Starting $this.")
